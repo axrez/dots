@@ -1,0 +1,8 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "json", "javascript", "javascriptreact", "typescript", "typescriptreact", "html"],
+  "styled-components.tags": [
+      "styled",
+      "css",
+      "sty"
+  ]
+}
