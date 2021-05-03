@@ -15,10 +15,14 @@ set incsearch
 set clipboard=unnamed
 set clipboard=unnamedplus
 
+set t_Co=256
+set cursorline
+
 call plug#begin(stdpath('data') . '/plugged')
 
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'morhetz/gruvbox'
+Plug 'sonph/onehalf', { 'rtp': 'vim'}
 
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
@@ -26,6 +30,7 @@ Plug 'junegunn/fzf.vim'
 Plug 'sheerun/vim-polyglot'
 Plug 'mbbill/undotree'
 Plug 'vim-airline/vim-airline'
+Plug 'easymotion/vim-easymotion'
 call plug#end()
 
 let g:gruvbox_contrast_dark = 'hard'
@@ -35,6 +40,7 @@ set background=dark
 let mapleader = " "
 
 let g:airline_powerline_fonts = 1
+let g:airline_theme='onehalfdark'
 
 " Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
 " delays and poor user experience.
@@ -106,4 +112,7 @@ nnoremap <C-p> :GFiles<CR>
 nnoremap <Leader>pf :Files<CR>
 nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>u :UndotreeShow<CR>
+
+map <Leader>f <Plug>(easymotion-bd-f)
+nmap <Leader>f <Plug>(easymotion-overwin-f)
 

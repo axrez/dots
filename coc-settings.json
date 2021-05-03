@@ -1,8 +1,15 @@
 {
-  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "json", "javascript", "javascriptreact", "typescript", "typescriptreact", "html"],
+  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "json", "javascript", "javascriptreact", "typescript", "typescriptreact", "html", "java"],
   "styled-components.tags": [
       "styled",
       "css",
       "sty"
-  ]
+  ],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "java.format.settings.url": "/home/emilio/.config/coc/extensions/node_modules/redhat.java/eclipse-formatter.xml"
 }
