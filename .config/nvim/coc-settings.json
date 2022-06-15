@@ -1,0 +1,18 @@
+{
+  "coc.preferences.formatOnSaveFiletypes": ["css", "markdown", "json", "javascript", "javascriptreact", "typescript", "typescriptreact", "html", "java", "go", "rust"],
+  "styled-components.tags": [
+      "styled",
+      "css",
+      "sty"
+  ],
+  "eslint.validate": [
+    "javascript",
+    "javascriptreact",
+    "typescript",
+    "typescriptreact"
+  ],
+  "tsserver.enable": true,
+  "omnisharp.debug.server": true,
+  "diagnostic.virtualText": true,
+  "diagnostic.virtualTextCurrentLineOnly": false
+}
