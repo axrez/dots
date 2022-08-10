@@ -142,8 +142,8 @@ nmap <Leader>f <Plug>(easymotion-overwin-f)
 " Setup floaterm
 let g:floaterm_gitcommit='floaterm'
 let g:floaterm_autoinsert=1
-let g:floaterm_width=0.8
-let g:floaterm_height=0.8
+let g:floaterm_width=0.95
+let g:floaterm_height=0.95
 let g:floaterm_wintitle=0
 let g:floaterm_autoclose=1
 
@@ -156,6 +156,7 @@ nnoremap <leader>t :FloatermNew --wintype=vsplit --width=0.35<CR>
 nnoremap <leader>gg :FloatermNew --autoclose=2 lazygit<CR>
 nnoremap <leader>rwr :FloatermNew --wintype=vsplit --width=0.35 cargo watch -x check -x run<CR>
 nnoremap <leader>rwc :FloatermNew --wintype=vsplit --width=0.35 cargo watch -x check<CR>
+nnoremap <leader>rwt :FloatermNew --wintype=vsplit --width=0.35 cargo watch -x check -x test<CR>
 
 " Setup nerdtree
 nnoremap <leader>n :NERDTreeFocus<CR>

@@ -1,0 +1,7 @@
+require('plugins')
+require('keybinds')
+require('colors')
+require('core')
+require('lsp')
+require('highlighting')
+require('telescope-config')
