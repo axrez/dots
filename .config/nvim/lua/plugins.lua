@@ -35,6 +35,11 @@ return require('packer').startup(function(use)
 	-- Lsp
 	use "neovim/nvim-lspconfig"
 
+    -- Rust lsp
+    use 'williamboman/mason.nvim'    
+    use 'williamboman/mason-lspconfig.nvim'
+    use 'simrat39/rust-tools.nvim'
+
 	-- cmp
 	use 'hrsh7th/cmp-nvim-lsp'
   	use 'hrsh7th/cmp-buffer'
@@ -65,16 +70,18 @@ return require('packer').startup(function(use)
 		run = ':TSUpdate'
 	}
 
-	-- Git provider
-	use 'lewis6991/gitsigns.nvim'
+	-- Git signs
+	use {
+        'lewis6991/gitsigns.nvim',
+        config = function()
+            require('gitsigns').setup()
+        end
+    }
 
-	-- Status bar
-	use {'famiu/feline.nvim', config = function()
-            require 'statusline'
-        end}
+    use "rebelot/heirline.nvim"
 
 	-- Toggle term
-	use {"akinsho/toggleterm.nvim", tag = 'v1.*', config = function()
+	use {"akinsho/toggleterm.nvim", tag = 'v2.*', config = function()
 		require 'toggleterm-config'
 	end}
 
@@ -104,6 +111,9 @@ return require('packer').startup(function(use)
 
     -- Fugitive 
     use "tpope/vim-fugitive"
+
+    -- Markdown preview
+    use 'davidgranstrom/nvim-markdown-preview'
 
 	if packer_bootstrap then
 		require('packer').sync()

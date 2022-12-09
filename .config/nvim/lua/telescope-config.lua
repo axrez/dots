@@ -9,5 +9,13 @@ require('telescope').setup{
 				results_width = 0.8,
        		 	},
 		}
-	}
+	},
+    pickers = {
+        lsp_definitions = {
+            initial_mode = "normal"
+        },
+        lsp_references = {
+            initial_mode = "normal"
+        }
+    }
 }

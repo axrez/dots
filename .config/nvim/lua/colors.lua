@@ -1,7 +1,10 @@
 local catppuccin = require("catppuccin")
 
-catppuccin.setup()
+catppuccin.setup({
+    flavour = "mocha", -- latte, frappe, macchiato, mocha
+})
 
-vim.g.catppuccin_flavour = "frappe" -- latte, frappe, macchiato, mocha
 vim.cmd[[colorscheme catppuccin]]
 vim.cmd[[highlight Normal guibg=none]]
+vim.opt.cursorline = true
+

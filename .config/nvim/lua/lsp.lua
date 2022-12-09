@@ -30,9 +30,9 @@ local kind_icons = {
 
 cmp.setup({
    formatting = {
-       fields = { "abbr", "kind", "menu" },
+       fields = { "menu", "abbr", "kind" },
        format = function(_, vim_item)
-           vim_item.kind = string.format("%s", kind_icons[vim_item.kind])
+           vim_item.menu = string.format("%s", kind_icons[vim_item.kind])
            return vim_item
         end,
    },
@@ -76,24 +76,36 @@ cmp.setup.cmdline(':', {
     })
 })
 
--- Setup lspconfig.
+-- Setup lspconfig ts.
 require('lspconfig').tsserver.setup({
     on_attach = function(client, bufnr)
         client.resolved_capabilities.document_formatting = false
-        client.resolved_capabilities.document_range_formatting = false        local ts_utils = require("nvim-lsp-ts-utils")
+        client.resolved_capabilities.document_range_formatting = false        
+        local ts_utils = require("nvim-lsp-ts-utils")
         ts_utils.setup({})
         ts_utils.setup_client(client)
     end,
-    capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+    capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 })
 
+
+-- Setup lspconfig css.
+require('lspconfig').cssls.setup{
+    capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
+}
+
+-- Setup lspconfig for astro
+require'lspconfig'.astro.setup{}
+
+-- Setup lspconfig for graphql
+require('lspconfig').graphql.setup{}
 
 -- Setup autoformatting
 local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
 require("null-ls").setup({
     sources = {
         require('null-ls').builtins.diagnostics.eslint,
-        require('null-ls').builtins.formatting.prettier
+        require('null-ls').builtins.formatting.prettier,
     }, 
 
     -- you can reuse a shared lspconfig on_attach callback here
@@ -105,14 +117,48 @@ require("null-ls").setup({
                 buffer = bufnr,
                 callback = function()
                     -- on 0.8, you should use vim.lsp.buf.format({ bufnr = bufnr }) instead
-                    vim.lsp.buf.formatting_sync({
-                        bufnr = bufnr,
-                        filter = function(client)
-                            return client.name == "null-ls"
-                        end
+                    vim.lsp.buf.format({
+                        bufnr = bufnr
                     })
                 end,
             })
         end
     end,
 })
+
+local rt = require("rust-tools")
+
+rt.setup({
+  server = {
+    on_attach = function(_, bufnr)
+      -- Hover actions
+      vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+      -- Code action groups
+      vim.keymap.set("n", "<Leader>a", rt.code_action_group.code_action_group, { buffer = bufnr })
+    end,
+  },
+})
+require('rust-tools').inlay_hints.enable()
+
+
+-- Treesitter Plugin Setup 
+require('nvim-treesitter.configs').setup {
+  ensure_installed = { "lua", "rust", "toml", "typescript", "tsx", "astro" },
+  auto_install = true,
+  highlight = {
+    enable = true,
+    additional_vim_regex_highlighting=false,
+  },
+  ident = { enable = true }, 
+  rainbow = {
+    enable = true,
+    extended_mode = true,
+    max_file_lines = nil,
+  }
+}
+
+vim.o.updatetime = 250
+vim.cmd [[autocmd! CursorHold,CursorHoldI * lua vim.diagnostic.open_float(nil, {focus=false})]]
+
+vim.cmd [[autocmd! BufWritePre *.rs lua vim.lsp.buf.formatting_sync(nil, 200)]]
+

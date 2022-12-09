@@ -17,3 +17,7 @@ vim.opt.shiftwidth = 4
 vim.opt.swapfile = false
 vim.opt.undofile = true
 
+vim.opt.spelllang = "en"
+vim.opt.spellsuggest = {"best", 9}
+vim.opt.spell = false
+
