@@ -115,6 +115,9 @@ return require('packer').startup(function(use)
     -- Markdown preview
     use 'davidgranstrom/nvim-markdown-preview'
 
+    -- Feline
+    use 'feline-nvim/feline.nvim'
+
 	if packer_bootstrap then
 		require('packer').sync()
 	end
